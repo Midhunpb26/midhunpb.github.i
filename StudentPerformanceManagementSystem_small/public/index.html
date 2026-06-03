@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TaskFlow Pro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div>
+          <div class="brand">TaskFlow Pro</div>
+          <p class="muted">Premium task control with calm analytics.</p>
+        </div>
+        <nav class="nav-links">
+          <button class="nav-btn active" data-view="dashboard">Dashboard</button>
+          <button class="nav-btn" data-view="tasks">My Tasks</button>
+          <button class="nav-btn" data-view="profile">Profile</button>
+        </nav>
+        <div class="sidebar-card">
+          <h3>Today</h3>
+          <p id="todayStatus">Loading your progress…</p>
+        </div>
+        <button id="themeToggle" class="ghost-btn">🌙 Dark Mode</button>
+        <button id="logoutBtn" class="ghost-btn danger">Logout</button>
+      </aside>
+
+      <main class="content">
+        <section id="authView" class="panel auth-panel active">
+          <div class="glass-card auth-card">
+            <h1>TaskFlow Pro</h1>
+            <p class="muted">Manage work, focus on what matters, and stay ahead.</p>
+            <div class="tabs">
+              <button class="tab-btn active" data-auth="login">Login</button>
+              <button class="tab-btn" data-auth="register">Register</button>
+            </div>
+            <form id="loginForm" class="auth-form">
+              <input type="email" id="loginEmail" placeholder="Email" required />
+              <input type="password" id="loginPassword" placeholder="Password" required />
+              <button class="primary-btn" type="submit">Sign In</button>
+            </form>
+            <form id="registerForm" class="auth-form hidden">
+              <input type="text" id="registerName" placeholder="Full Name" required />
+              <input type="email" id="registerEmail" placeholder="Email" required />
+              <input type="password" id="registerPassword" placeholder="Password" required />
+              <button class="primary-btn" type="submit">Create Account</button>
+            </form>
+          </div>
+        </section>
+
+        <section id="dashboardView" class="view hidden">
+          <header class="topbar">
+            <div>
+              <p class="eyebrow">Overview</p>
+              <h2>Dashboard</h2>
+            </div>
+            <button id="newTaskBtn" class="primary-btn">+ New Task</button>
+          </header>
+
+          <div class="stats-grid">
+            <article class="stat-card accent-blue"><h3>Total Tasks</h3><strong id="totalTasks">0</strong></article>
+            <article class="stat-card accent-green"><h3>Completed</h3><strong id="completedTasks">0</strong></article>
+            <article class="stat-card accent-orange"><h3>Pending</h3><strong id="pendingTasks">0</strong></article>
+            <article class="stat-card accent-purple"><h3>Progress</h3><strong id="progressPercent">0%</strong></article>
+          </div>
+
+          <div class="panel-grid">
+            <article class="glass-card panel-card">
+              <h3>Task Overview</h3>
+              <div class="progress-bar"><span id="progressBar"></span></div>
+              <p id="dashboardSummary" class="muted">No tasks yet. Create your first task to see the progress chart update.</p>
+            </article>
+            <article class="glass-card panel-card">
+              <h3>Quick Actions</h3>
+              <div class="chip-row"><span class="chip">Search</span><span class="chip">Filter</span><span class="chip">Prioritize</span><span class="chip">Track</span></div>
+              <input id="searchInput" type="search" placeholder="Search tasks..." />
+              <select id="priorityFilter"><option value="All">All priorities</option><option>Low</option><option>Medium</option><option>High</option></select>
+              <select id="statusFilter"><option value="All">All status</option><option value="Completed">Completed</option><option value="Pending">Pending</option></select>
+            </article>
+          </div>
+        </section>
+
+        <section id="tasksView" class="view hidden">
+          <header class="topbar">
+            <div>
+              <p class="eyebrow">Workspace</p>
+              <h2>Task Board</h2>
+            </div>
+            <button id="refreshTasksBtn" class="ghost-btn">Refresh</button>
+          </header>
+          <div id="taskList" class="task-list"></div>
+        </section>
+
+        <section id="profileView" class="view hidden">
+          <header class="topbar">
+            <div>
+              <p class="eyebrow">Account</p>
+              <h2>Profile</h2>
+            </div>
+          </header>
+          <article class="glass-card panel-card profile-card">
+            <h3>Account Details</h3>
+            <div id="profileInfo" class="profile-info"></div>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <div id="taskModal" class="modal hidden">
+      <div class="modal-card glass-card">
+        <h3 id="modalTitle">Create Task</h3>
+        <form id="taskForm" class="auth-form">
+          <input id="taskTitle" placeholder="Task title" required />
+          <textarea id="taskDescription" placeholder="Details"></textarea>
+          <select id="taskPriority"><option>Low</option><option selected>Medium</option><option>High</option></select>
+          <input id="taskDueDate" type="date" />
+          <div class="modal-actions">
+            <button type="button" id="closeModalBtn" class="ghost-btn">Cancel</button>
+            <button type="submit" class="primary-btn">Save Task</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
